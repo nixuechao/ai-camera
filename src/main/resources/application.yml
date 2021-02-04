@@ -1,1 +1,9 @@
-
+mqtt:
+  client:
+    pub-client-id: pubServer
+    sub-client-id: subServer
+  connection:
+    uri: 'tcp://192.168.1.14:1883'
+    connection-timeout: 20
+    keep-alive-interval: 60
+    clean-session: true
