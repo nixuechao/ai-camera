@@ -11,6 +11,8 @@ import com.gishere.aicamera.config.mqtt.ConnectionProperty;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * 暴露的服务端点
  *
@@ -34,9 +36,11 @@ public class Endpoint {
      * 数据推送端点
      */
     @PostMapping("/data/push")
-    public IpcRep dataPush(@RequestBody PushData pushData) {
+    public IpcRep dataPush(@RequestBody Map<String,Object> params) {
+        JSONObject jsonObject = JSONUtil.parseObj(params);
+        PushData pushData = JSONUtil.toBean(jsonObject, PushData.class);
         try {
-            camPushDataProcessHandler.process(pushData);
+            camPushDataProcessHandler.next(pushData);
         } catch (Exception e) {
             log.error("IPC数据处理失败", e);
             return IpcRep.success();

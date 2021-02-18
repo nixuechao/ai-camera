@@ -1,6 +1,7 @@
 package com.gishere.aicamera.config.http.handle;
 
 import com.gishere.aicamera.config.http.domain.push.PushData;
+import com.gishere.aicamera.config.http.domain.push.smart.FlowStats;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,19 +11,14 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2021/2/4.
  */
 @Slf4j
-public class FlowStatsDataHandler extends ProcessHandler {
+public class FlowStatsDataHandler extends ProcessHandler<FlowStats> {
+    @Override
+    public void process(FlowStats data) {
+        log.info("客流统计数据处理:{}", data);
+    }
 
     @Override
-    public void process(PushData pushData) {
-        if (pushData.getSmartData().getFlowStats() == null) {
-            return;
-        }
-        log.info("客流统计数据处理..");
-
-
-        if (nextHandler == null) {
-            return;
-        }
-        nextHandler.process(pushData);
+    public FlowStats getData(PushData pushData) {
+        return pushData.getSmartData().getFlowStats();
     }
 }

@@ -22,7 +22,7 @@ public enum PubTopicEnum {
     PUB_SERVER_ASYNC("hobot/+/service/async/request"),
 
     /**
-     * 属性下发同步
+     * 服务下发同步
      */
     PUB_SERVER_SYNC("hobot/+/service/sync/request"),
     ;

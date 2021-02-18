@@ -37,10 +37,10 @@ public class SendConfig {
         sender.setPubAfterSendProcessThreadPool(pubAfterSendProcessThreadPool);
         sender.setAfterSendHandler((sent, message) -> {
             if (sent) {
-                log.info("发送消息成功{} {}", message.getHeaders().get(MqttHeaders.TOPIC), message.getPayload());
+                log.info("发送消息成功,{} {}", message.getHeaders().get(MqttHeaders.TOPIC), message.getPayload());
                 return;
             }
-            log.error("发送消息失败{} {}", message.getHeaders().get(MqttHeaders.TOPIC), message.getPayload());
+            log.error("发送消息失败,{} {}", message.getHeaders().get(MqttHeaders.TOPIC), message.getPayload());
         });
         return sender;
     }

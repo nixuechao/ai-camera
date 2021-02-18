@@ -10,18 +10,14 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2021/2/4.
  */
 @Slf4j
-public class PushDataHandler extends ProcessHandler {
+public class PushDataHandler extends ProcessHandler<PushData> {
+    @Override
+    public void process(PushData data) {
+        log.info("收到IPC数据推送");
+    }
 
     @Override
-    public void process(PushData pushData) {
-        if (pushData == null) {
-            return;
-        }
-
-        log.info("收到IPC数据推送,{}", pushData);
-        if (nextHandler == null) {
-            return;
-        }
-        nextHandler.process(pushData);
+    public PushData getData(PushData pushData) {
+        return pushData;
     }
 }

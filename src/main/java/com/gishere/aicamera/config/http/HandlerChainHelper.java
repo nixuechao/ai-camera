@@ -1,6 +1,7 @@
 package com.gishere.aicamera.config.http;
 
 import com.gishere.aicamera.config.http.handle.ProcessHandler;
+import com.gishere.aicamera.config.http.handle.PushDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,28 +12,28 @@ import java.util.List;
  */
 public class HandlerChainHelper {
 
-    private ProcessHandler handler;
+    private PushDataHandler handler;
 
-    private List<ProcessHandler> handlerList = new ArrayList<>();
+    private final List<ProcessHandler<?>> handlerList = new ArrayList<>();
 
 
     private HandlerChainHelper() {
     }
 
-    public static HandlerChainHelper createHandler(ProcessHandler handler) {
+    public static HandlerChainHelper createHandler(PushDataHandler handler) {
         HandlerChainHelper helper = new HandlerChainHelper();
         helper.handler = handler;
         return helper;
     }
 
-    public HandlerChainHelper add(ProcessHandler handler) {
+    public HandlerChainHelper add(ProcessHandler<?> handler) {
         handlerList.add(handler);
         return this;
     }
 
-    public ProcessHandler get() {
-        ProcessHandler tempHandler = handler;
-        for (ProcessHandler processHandler : handlerList) {
+    public PushDataHandler get() {
+        ProcessHandler<?> tempHandler = handler;
+        for (ProcessHandler<?> processHandler : handlerList) {
             tempHandler.setNextHandler(processHandler);
             tempHandler = processHandler;
         }

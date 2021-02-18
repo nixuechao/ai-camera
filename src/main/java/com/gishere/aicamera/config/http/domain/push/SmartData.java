@@ -1,5 +1,6 @@
 package com.gishere.aicamera.config.http.domain.push;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 import com.gishere.aicamera.config.http.domain.push.smart.*;
 
@@ -7,6 +8,7 @@ import com.gishere.aicamera.config.http.domain.push.smart.*;
  * @author niXueChao
  * @date 2021/2/4.
  */
+@JsonAutoDetect(getterVisibility=JsonAutoDetect.Visibility.NONE)
 @Data
 public class SmartData {
     /**
@@ -20,7 +22,7 @@ public class SmartData {
     /**
      * 客流统计
      */
-    private FlowStats flowStats;
+    private FlowStats FlowStats;
     /**
      * 数据识别
      */

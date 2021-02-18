@@ -35,7 +35,7 @@ public class SubMessageProcessorManager {
     }
 
     public <T> void process(Message<T> message) {
-        Object topicObj = message.getHeaders().get(MqttHeaders.TOPIC);
+        Object topicObj = message.getHeaders().get(MqttHeaders.RECEIVED_TOPIC);
         if (topicObj == null) {
             log.error("无法获取消息topic:{}", message.getPayload());
             return;
@@ -49,7 +49,7 @@ public class SubMessageProcessorManager {
         }
 
         String clientId = SubTopicEnum.getClientId(topic);
-        String requestId = SubTopicEnum.getClientId(topic);
+        String requestId = SubTopicEnum.getRequestId(topic);
 
         if (requestId == null) {
             //只有同步应答topic才会有requestId,异步的requestId需要在payload中获取

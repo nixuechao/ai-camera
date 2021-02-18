@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021/2/4.
  */
 @Configuration
-public class Config {
+public class HandlerConfig {
 
     @Bean
     public ProcessHandler camPushDataProcessHandler() {

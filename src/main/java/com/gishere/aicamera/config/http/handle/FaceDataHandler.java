@@ -1,6 +1,7 @@
 package com.gishere.aicamera.config.http.handle;
 
 import com.gishere.aicamera.config.http.domain.push.PushData;
+import com.gishere.aicamera.config.http.domain.push.smart.Face;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,19 +11,14 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2021/2/4.
  */
 @Slf4j
-public class FaceDataHandler extends ProcessHandler {
+public class FaceDataHandler extends ProcessHandler<Face> {
+    @Override
+    public void process(Face data) {
+        log.info("处理抓拍数据:{}", data);
+    }
 
     @Override
-    public void process(PushData pushData) {
-        if (pushData.getSmartData().getFace() == null) {
-            return;
-        }
-        log.info("抓拍数据处理..");
-
-
-        if (nextHandler == null) {
-            return;
-        }
-        nextHandler.process(pushData);
+    public Face getData(PushData pushData) {
+        return pushData.getSmartData().getFace();
     }
 }

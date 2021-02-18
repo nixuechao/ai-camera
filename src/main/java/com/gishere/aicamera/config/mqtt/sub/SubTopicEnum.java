@@ -74,7 +74,8 @@ public enum SubTopicEnum {
         Pattern p = Pattern.compile(str);
         Matcher m = p.matcher(topic);
         if (m.find()) {
-            return m.group().substring(6);
+            String group = m.group();
+            return group.substring(0, group.length() - 9);
         }
         return null;
     }

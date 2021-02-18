@@ -1,5 +1,6 @@
 package com.gishere.aicamera.config.http.domain.push;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Data;
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @author niXueChao
  * @date 2021/2/4.
  */
+@JsonAutoDetect(getterVisibility=JsonAutoDetect.Visibility.NONE)
 @Data
 public class Properties {
     /**

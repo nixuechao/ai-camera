@@ -7,3 +7,10 @@ mqtt:
     connection-timeout: 20
     keep-alive-interval: 60
     clean-session: true
+    username: admin
+    password: public
+
+spring:
+  redis:
+    host: localhost
+    port: 6379

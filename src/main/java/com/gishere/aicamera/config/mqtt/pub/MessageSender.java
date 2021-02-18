@@ -28,7 +28,8 @@ public class MessageSender {
         //BeforeSend
         if (beforeSendHandler != null) {
             if (!beforeSendHandler.handle(messageInfo)) {
-                log.warn("取消发送消息{}: {}: {}", messageInfo.getTopic(), messageInfo.getClientId(), messageInfo.getPayload());
+                log.warn("取消发送消息,{}: {}: {}", messageInfo.getTopic(), messageInfo.getClientId(), messageInfo.getPayload());
+                return;
             }
         }
 
