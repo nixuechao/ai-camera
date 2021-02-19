@@ -61,6 +61,7 @@ public class Endpoint {
 
     /**
      * 获取IPC配置所需的token(接入URL)
+     * @param authUrl /ipc/auth 的全路径,包含协议名称
      */
     @GetMapping("/token")
     public String getToken(@RequestParam String authUrl) {

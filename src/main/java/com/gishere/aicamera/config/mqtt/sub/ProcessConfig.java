@@ -14,7 +14,13 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class ProcessConfig {
 
-    @Bean
+    /**
+     * 接收消息后若处理对象需要异步处理将使用此线程池
+     *
+     * @return
+     * @see SubMessageProcessProvider#asynchronous()
+     */
+    @Bean("subProcessAsyncThreadPool")
     public ThreadPoolExecutor subProcessAsyncThreadPool() {
         return new ThreadPoolExecutor(1, 15, 2L, TimeUnit.MINUTES,
                 new ArrayBlockingQueue<>(5000),

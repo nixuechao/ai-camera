@@ -11,6 +11,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class HandlerConfig {
 
+    /**
+     * 定义处理链
+     *
+     * @return
+     */
     @Bean
     public ProcessHandler camPushDataProcessHandler() {
         return HandlerChainHelper.createHandler(new PushDataHandler())
@@ -20,4 +25,6 @@ public class HandlerConfig {
                 .add(new FlowStatsDataHandler())
                 .get();
     }
+
+
 }

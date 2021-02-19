@@ -18,7 +18,13 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class SendConfig {
 
-    @Bean
+    /**
+     * 消息发送后若需要日志等非事务操作,将使用此线程池执行后续操作
+     *
+     * @return
+     * @see MessageSender.AfterSendHandler
+     */
+    @Bean("pubAfterSendProcessThreadPool")
     public ThreadPoolExecutor pubAfterSendProcessThreadPool() {
         return new ThreadPoolExecutor(1, 15, 2L, TimeUnit.MINUTES,
                 new ArrayBlockingQueue<>(5000),

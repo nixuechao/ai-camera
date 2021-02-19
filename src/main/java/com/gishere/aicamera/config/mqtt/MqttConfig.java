@@ -26,6 +26,13 @@ import java.util.stream.Collectors;
 @Configuration
 public class MqttConfig {
 
+    /**
+     * MQTT连接工厂
+     *
+     * @param property 连接属性
+     * @return
+     * @see ConnectionProperty
+     */
     @Bean
     public MqttPahoClientFactory factory(ConnectionProperty property) {
         DefaultMqttPahoClientFactory factory = new DefaultMqttPahoClientFactory();
@@ -41,11 +48,24 @@ public class MqttConfig {
         return factory;
     }
 
+    /**
+     * 订阅管道
+     *
+     * @return
+     */
     @Bean
     public DirectChannel subChannel() {
         return new DirectChannel();
     }
 
+    /**
+     * 订阅适配器
+     *
+     * @param factory
+     * @param clientProperty
+     * @param subChannel
+     * @return
+     */
     @Bean
     public MqttPahoMessageDrivenChannelAdapter subAdapter(MqttPahoClientFactory factory, ClientProperty clientProperty, DirectChannel subChannel) {
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(clientProperty.getSubClientId(), factory);
@@ -60,6 +80,13 @@ public class MqttConfig {
         return adapter;
     }
 
+    /**
+     * 定义订阅流程
+     *
+     * @param adapter
+     * @param manager
+     * @return
+     */
     @Bean
     public IntegrationFlow subFlow(MqttPahoMessageDrivenChannelAdapter adapter, SubMessageProcessorManager manager) {
         return IntegrationFlows.from(adapter)
@@ -68,16 +95,35 @@ public class MqttConfig {
     }
 
 
+    /**
+     * 发布管道
+     *
+     * @return
+     */
     @Bean
     public DirectChannel pubChannel() {
         return new DirectChannel();
     }
 
+    /**
+     * 发布消息处理器
+     *
+     * @param factory
+     * @param clientProperty
+     * @return
+     */
     @Bean
     public MqttPahoMessageHandler pubHandler(MqttPahoClientFactory factory, ClientProperty clientProperty) {
         return new MqttPahoMessageHandler(clientProperty.getPubClientId(), factory);
     }
 
+    /**
+     * 定义发布流程
+     *
+     * @param pubChannel
+     * @param handler
+     * @return
+     */
     @Bean
     public IntegrationFlow pubFlow(DirectChannel pubChannel, MqttPahoMessageHandler handler) {
         return IntegrationFlows.from(pubChannel).handle(handler).get();

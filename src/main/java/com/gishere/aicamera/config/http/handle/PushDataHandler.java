@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PushDataHandler extends ProcessHandler<PushData> {
     @Override
     public void process(PushData data) {
-        log.info("收到IPC数据推送");
+        log.info("收到IPC数据推送,设备号:{}", data.getProperties().getDeviceId());
     }
 
     @Override
